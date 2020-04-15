@@ -142,7 +142,7 @@ func initForestCoverRunner() {
 
 				// send the forest cover!
 				sendForestCoverCmd := fmt.Sprintf(
-					"xrncli tx wasm execute %v `%v` --from %v --chain-id %v --node %v -y",
+					"xrncli tx wasm execute %v `%v` --gas auto --fee 5000utree --from %v --chain-id %v --node %v -y",
 					contract, updateEcostateCmd, key, chain, node)
 
 				fmt.Println("send command", sendForestCoverCmd)
