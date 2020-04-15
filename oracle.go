@@ -138,11 +138,11 @@ func initForestCoverRunner() {
 			for _, contract := range ContractsRegistry {
 				fmt.Println("Contract address:", contract)
 
-				updateEcostateCmd := fmt.Sprintf("{\"update_ecostate\":{\"ecostate\": %d}", rand.Intn(400))
+				updateEcostateCmd := fmt.Sprintf("{\"update_ecostate\":{\"ecostate\": %d}}", rand.Intn(400))
 
 				// send the forest cover!
 				sendForestCoverCmd := fmt.Sprintf(
-					"xrncli tx wasm execute %v `%v` --gas auto --fees 5000utree --from %v --chain-id %v --node %v -y",
+					"xrncli tx wasm execute %v '%v' --gas auto --fees 5000utree --from %v --chain-id %v --node %v -y",
 					contract, updateEcostateCmd, key, chain, node)
 
 				fmt.Println("send command", sendForestCoverCmd)
