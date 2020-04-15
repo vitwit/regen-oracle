@@ -150,7 +150,7 @@ func initForestCoverRunner() {
 				executeCmd(sendForestCoverCmd, pass, pass)
 			}
 
-			time.Sleep(10000 * time.Millisecond)
+			time.Sleep(60000 * time.Millisecond)
 		}
 	}()
 }
