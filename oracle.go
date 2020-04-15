@@ -120,6 +120,8 @@ func registerHandler(res http.ResponseWriter, request *http.Request) {
 
 	ContractsRegistry = append(ContractsRegistry, contractAddress)
 
+	sendForestCover(contractAddress)
+
 	res.WriteHeader(http.StatusOK)
 	json.NewEncoder(res).Encode(SuccessResponse{
 		Status: true,
@@ -135,22 +137,26 @@ func initForestCoverRunner() {
 
 		for {
 
+			fmt.Println("ContractsRegistry addresses:", ContractsRegistry)
+
 			for _, contract := range ContractsRegistry {
-				fmt.Println("Contract address:", contract)
-
-				updateEcostateCmd := fmt.Sprintf("{\"update_ecostate\":{\"ecostate\": %d}}", rand.Intn(400))
-
-				// send the forest cover!
-				sendForestCoverCmd := fmt.Sprintf(
-					"xrncli tx wasm execute %v '%v' --gas auto --fees 5000utree --from %v --chain-id %v --node %v -y",
-					contract, updateEcostateCmd, key, chain, node)
-
-				fmt.Println("send command", sendForestCoverCmd)
-
-				executeCmd(sendForestCoverCmd, pass, pass)
+				sendForestCover(contract)
 			}
 
-			time.Sleep(60000 * time.Millisecond)
+			time.Sleep(600000 * time.Millisecond)
 		}
 	}()
+}
+
+func sendForestCover(contract string) {
+	updateEcostateCmd := fmt.Sprintf("{\"update_ecostate\":{\"ecostate\": %d}}", rand.Intn(400))
+
+	// send the forest cover!
+	sendForestCoverCmd := fmt.Sprintf(
+		"xrncli tx wasm execute %v '%v' --gas auto --fees 5000utree --from %v --chain-id %v --node %v -y",
+		contract, updateEcostateCmd, key, chain, node)
+
+	fmt.Println("send command", sendForestCoverCmd)
+
+	executeCmd(sendForestCoverCmd, pass, pass)
 }
