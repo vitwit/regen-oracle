@@ -143,7 +143,7 @@ func initForestCoverRunner() {
 				sendForestCover(contract)
 			}
 
-			time.Sleep(600000 * time.Millisecond)
+			time.Sleep(120000 * time.Millisecond)
 		}
 	}()
 }
