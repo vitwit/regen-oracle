@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"math/rand"
 	"net/http"
 	"os"
 	"os/exec"
@@ -137,7 +138,7 @@ func initForestCoverRunner() {
 			for _, contract := range ContractsRegistry {
 				fmt.Println("Contract address:", contract)
 
-				updateEcostateCmd := "{\"update_ecostate\":{\"ecostate\": 2710}"
+				updateEcostateCmd := fmt.Sprintf("{\"update_ecostate\":{\"ecostate\": %d}", rand.Intn(400))
 
 				// send the forest cover!
 				sendForestCoverCmd := fmt.Sprintf(
